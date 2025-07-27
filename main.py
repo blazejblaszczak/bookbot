@@ -1,4 +1,4 @@
-from stats import words_counter
+from stats import character_counter, words_counter
 
 
 def get_book_text():
@@ -10,4 +10,6 @@ def get_book_text():
 
 if __name__ == "__main__":
 	# print(get_book_text())
-	print(words_counter(get_book_text()))
+	book = get_book_text()
+	print(words_counter(book))
+	print(character_counter(book))
