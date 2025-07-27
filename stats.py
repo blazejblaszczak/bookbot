@@ -1,7 +1,7 @@
 def words_counter(book):
 	num_words = len(book.split())
 
-	return f'{num_words} words found in the document'
+	return f'Found {num_words} total words'
 
 
 def character_counter(book):
@@ -15,8 +15,19 @@ def character_counter(book):
 	return count_dict
 
 
+def character_list(char_dict):
+	char_list = []
+
+	for k, v in char_dict.items():
+		if k.isalpha():
+			char_list.append({"char": k, "num": v})
+
+	return sorted(char_list, key=lambda x: x["num"], reverse=True)
+
+
 
 if __name__ == "__main__":
 	# print(words_counter())
-	test_text = 'BaNAna'
-	print(character_counter(test_text))
+	test_text = 'Ba,NA.na'
+	char_dict = character_counter(test_text)
+	print(character_list(char_dict))
