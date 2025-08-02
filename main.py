@@ -1,3 +1,4 @@
+import sys
 from stats import (
     character_counter,
 	character_list,
@@ -5,8 +6,17 @@ from stats import (
 )
 
 
-def get_book_text():
-	with open("/home/blaise/Workspace/repos/bookbot/books/frankenstein.txt") as f:
+if len(sys.argv) < 2:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
+
+
+script_name = sys.argv[0]
+sys_book_path = sys.argv[1]
+
+
+def get_book_text(book_path):
+	with open(f"/home/blaise/Workspace/repos/bookbot/{book_path}") as f:
 		file_contents = f.read()
 
 	return file_contents
@@ -15,7 +25,7 @@ def get_book_text():
 def generate_report(book):
 	report_text = f"""
 ============ BOOKBOT ============
-Analyzing book found at books/frankenstein.txt...
+Analyzing book found at {sys_book_path}...
 ----------- Word Count ----------
 Found {words_counter(book)} total words
 --------- Character Count -------
@@ -30,9 +40,5 @@ Found {words_counter(book)} total words
 	return report_text
 
 
-if __name__ == "__main__":
-	# print(get_book_text())
-	book = get_book_text()
-	# print(words_counter(book))
-	# print(character_counter(book))
-	print(generate_report(book))
+book_text = get_book_text(book_path=sys.argv[1])
+print(generate_report(book=book_text))
